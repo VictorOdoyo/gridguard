@@ -1,0 +1,47 @@
+{
+  "family": "pv_resistive",
+  "variant": 8,
+  "inputs": {
+    "network": {
+      "base_mva": 100,
+      "buses": [
+        {
+          "id": "s",
+          "kind": "Slack"
+        },
+        {
+          "id": "d"
+        }
+      ],
+      "branches": [
+        {
+          "id": "l",
+          "from": "s",
+          "to": "d",
+          "r": 0.08,
+          "x": 0,
+          "rate_mva": 100
+        }
+      ],
+      "generators": [
+        {
+          "id": "g",
+          "bus": "s",
+          "qmin": -100,
+          "qmax": 100,
+          "pmax_mw": 1000
+        }
+      ],
+      "loads": [
+        {
+          "id": "load",
+          "bus": "d",
+          "p_mw": 10,
+          "q_mvar": 0
+        }
+      ]
+    },
+    "scale": 1.6
+  },
+  "expected": 0.9870318264754367
+}
