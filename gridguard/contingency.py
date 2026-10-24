@@ -7,7 +7,7 @@ def evaluate(network,method='newton',limits=None,promote=True):
     for island in result['islands']:
         if island['status']=='solved':
             rows.append(violations(island['result'],**(limits or {})));reserve+=reactive_reserve(n,island['result']);adequacy+=real_power_adequacy(n,island['result'])
-    unknown=any(r['status'] in ['failed','nonconverged'] for r in result['islands']);violation_count=sum(r['count'] for r in rows);capacity_fail=sum(r['adequate'] is False for r in adequacy);reactive_fail=sum(r['outside_limits'] for r in reserve)
+    unknown=any(r['status'] in ['failed','nonconverged'] for r in result['islands']);violation_count=sum(r['count'] for r in rows);capacity_fail=sum(r['adequate'] is False for r in adequacy);reactive_fail=sum(r['outside_limits'] is True for r in reserve)
     secure=result['solved'] and violation_count==0 and capacity_fail==0 and reactive_fail==0
     return dict(result,secure=secure,violations=rows,violation_count=violation_count,reactive_reserve=reserve,real_power_adequacy=adequacy,unknown=unknown,severity=sum(r['severity'] for r in rows)+capacity_fail+reactive_fail,capacity_bounds_complete=all(r['adequate'] is not None for r in adequacy))
 def n_minus_one(network,method='newton',limits=None,include_generators=True,promote=True):

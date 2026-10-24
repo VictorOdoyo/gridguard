@@ -9,7 +9,10 @@ def reactive_reserve(network,result):
     for bus in result.get('buses',[]):
         generators=[d for d in network.get('generators',[]) if d.get('status',True) and d['bus']==bus['id']]
         if not generators:continue
-        lo=sum(d.get('qmin',-1e6) for d in generators);hi=sum(d.get('qmax',1e6) for d in generators);used=bus.get('required_generation_mvar',0)
+        if 'required_generation_mvar' not in bus:
+            rows.append({'bus':bus['id'],'q_required_mvar':None,'upward_mvar':None,'downward_mvar':None,'outside_limits':None,'reason':'Reactive output unavailable in this solver approximation'})
+            continue
+        lo=sum(d.get('qmin',-1e6) for d in generators);hi=sum(d.get('qmax',1e6) for d in generators);used=bus['required_generation_mvar']
         rows.append({'bus':bus['id'],'q_required_mvar':used,'upward_mvar':hi-used,'downward_mvar':used-lo,'outside_limits':used<lo-1e-6 or used>hi+1e-6})
     return rows
 def real_power_adequacy(network,result):
@@ -18,7 +21,9 @@ def real_power_adequacy(network,result):
         generators=[d for d in network.get('generators',[]) if d.get('status',True) and d['bus']==bus['id']]
         if not generators:continue
         # An absent bound remains unknown instead of implying unlimited capacity.
-        bounded=all('pmax_mw' in d for d in generators);required=bus.get('required_generation_mw',bus.get('p_injection_mw',0))
+        bounded=all('pmax_mw' in d for d in generators)
+        load=sum(d['p_mw'] for d in network.get('loads',[]) if d.get('status',True) and d['bus']==bus['id'])
+        required=bus.get('required_generation_mw',bus.get('p_injection_mw',0)+load)
         maximum=sum(d.get('pmax_mw',0) for d in generators) if bounded else None
         rows.append({'bus':bus['id'],'required_mw':required,'maximum_mw':maximum,'adequate':required<=maximum+1e-6 if bounded else None})
     return rows
