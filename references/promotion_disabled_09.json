@@ -1,0 +1,54 @@
+{
+  "family": "promotion_disabled",
+  "variant": 9,
+  "inputs": {
+    "network": {
+      "base_mva": 100,
+      "buses": [
+        {
+          "id": "s",
+          "kind": "Slack"
+        },
+        {
+          "id": "d"
+        }
+      ],
+      "branches": [
+        {
+          "id": "l",
+          "from": "s",
+          "to": "d",
+          "r": 0,
+          "x": 0.1,
+          "rate_mva": 100
+        }
+      ],
+      "generators": [
+        {
+          "id": "g",
+          "bus": "s",
+          "qmin": -100,
+          "qmax": 100,
+          "pmax_mw": 1000
+        },
+        {
+          "id": "local",
+          "bus": "d",
+          "p_mw": 9,
+          "qmin": -20,
+          "qmax": 20,
+          "pmax_mw": 100
+        }
+      ],
+      "loads": [
+        {
+          "id": "load",
+          "bus": "d",
+          "p_mw": 9,
+          "q_mvar": 0
+        }
+      ]
+    }
+  },
+  "expected": 9
+}
