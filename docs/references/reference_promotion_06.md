@@ -1,0 +1,5 @@
+# reference promotion 06
+
+After radial separation, a local reference-capable generator can support the island only when reference promotion is explicitly enabled.
+
+Inputs and expected values: [fixture](../../references/reference_promotion_06.json). Variant 6 exercises a distinct operating point or bound within this family. The regression uses 1e-7 relative and absolute tolerance unless checking solver residual explicitly. This is an analytical example, not a certified field study.
