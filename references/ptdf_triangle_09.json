@@ -1,0 +1,66 @@
+{
+  "family": "ptdf_triangle",
+  "variant": 9,
+  "inputs": {
+    "network": {
+      "base_mva": 100,
+      "buses": [
+        {
+          "id": "s",
+          "kind": "Slack"
+        },
+        {
+          "id": "a"
+        },
+        {
+          "id": "b"
+        }
+      ],
+      "generators": [
+        {
+          "id": "g",
+          "bus": "s",
+          "qmin": -100,
+          "qmax": 100,
+          "pmax_mw": 1000
+        }
+      ],
+      "loads": [
+        {
+          "id": "load",
+          "bus": "b",
+          "p_mw": 19,
+          "q_mvar": 0
+        }
+      ],
+      "branches": [
+        {
+          "id": "sa",
+          "from": "s",
+          "to": "a",
+          "x": 0.095,
+          "rate_mva": 100
+        },
+        {
+          "id": "ab",
+          "from": "a",
+          "to": "b",
+          "x": 0.11800000000000001,
+          "rate_mva": 100
+        },
+        {
+          "id": "sb",
+          "from": "s",
+          "to": "b",
+          "x": 0.17300000000000001,
+          "rate_mva": 100
+        }
+      ]
+    }
+  },
+  "expected": [
+    -0.44818652849740936,
+    -0.44818652849740936,
+    -0.5518134715025907
+  ]
+}
