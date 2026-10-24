@@ -1,0 +1,13 @@
+{
+  "family": "reactive_reserve",
+  "variant": 4,
+  "inputs": {
+    "required": 4,
+    "qmin": -20,
+    "qmax": 30
+  },
+  "expected": [
+    26,
+    24
+  ]
+}
