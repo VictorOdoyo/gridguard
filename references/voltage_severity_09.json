@@ -1,0 +1,8 @@
+{
+  "family": "voltage_severity",
+  "variant": 9,
+  "inputs": {
+    "voltage": 0.9229999999999999
+  },
+  "expected": 0.5399999999999999
+}
