@@ -1,0 +1,8 @@
+{
+  "family": "overload_severity",
+  "variant": 2,
+  "inputs": {
+    "loading": 106
+  },
+  "expected": 0.06
+}
