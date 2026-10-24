@@ -1,0 +1,100 @@
+{
+  "network": {
+    "base_mva": 100,
+    "buses": [
+      {
+        "id": "s",
+        "kind": "Slack"
+      },
+      {
+        "id": "a",
+        "kind": "PV"
+      },
+      {
+        "id": "b"
+      }
+    ],
+    "generators": [
+      {
+        "id": "gs",
+        "bus": "s",
+        "p_mw": 30,
+        "qmin": -80,
+        "qmax": 80,
+        "pmax_mw": 150
+      },
+      {
+        "id": "ga",
+        "bus": "a",
+        "p_mw": 40,
+        "qmin": -30,
+        "qmax": 40,
+        "pmax_mw": 80
+      }
+    ],
+    "loads": [
+      {
+        "id": "la",
+        "bus": "a",
+        "p_mw": 30,
+        "q_mvar": 10
+      },
+      {
+        "id": "lb",
+        "bus": "b",
+        "p_mw": 70,
+        "q_mvar": 25
+      }
+    ],
+    "branches": [
+      {
+        "id": "sa",
+        "from": "s",
+        "to": "a",
+        "r": 0.01,
+        "x": 0.1,
+        "rate_mva": 90
+      },
+      {
+        "id": "ab",
+        "from": "a",
+        "to": "b",
+        "r": 0.015,
+        "x": 0.12,
+        "rate_mva": 80
+      },
+      {
+        "id": "sb",
+        "from": "s",
+        "to": "b",
+        "r": 0.02,
+        "x": 0.18,
+        "rate_mva": 80
+      }
+    ]
+  },
+  "limits": {
+    "vmin": 0.95,
+    "vmax": 1.05,
+    "loading_limit": 100
+  },
+  "scales": [
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5,
+    1.75,
+    2
+  ],
+  "qv_bus": "b",
+  "q_injections_mvar": [
+    -20,
+    -10,
+    0,
+    10,
+    20,
+    30,
+    40
+  ]
+}
