@@ -1,0 +1,9 @@
+{
+  "family": "real_adequacy",
+  "variant": 4,
+  "inputs": {
+    "required": 40,
+    "maximum": 39
+  },
+  "expected": false
+}
